@@ -2,7 +2,9 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
 var app = express();
-var PORT = 3000;
+
+var PORT = process.env.PORT || 3000;
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -14,3 +16,14 @@ app.listen(PORT, function() {
 app.get("/", function(req, res){
     res.sendFile(path.join(__dirname, "index.html"));
 });
+
+app.get("/api/cars", function (req, res) {
+    var cars = [
+        {
+        make: "Acura",
+        model: "mdx"
+        }
+    ];
+
+    res.send(cars);
+})
